@@ -41,7 +41,9 @@
 					Scale Map Bigger: L<br/><br>
 					Rotate Object:R<br><br>
 					Look Around: MOUSE<br><br><br>
-					Music: "Kaal_kodikondu_Bava"
+					Music: "Kaal_kodikondu_Bava"<br><br><br><br>
+					TIP ! <br>
+					PRESS JUMP WHEN CLIMBING STAIRS
 					
 				</p>
 			</div>
@@ -200,7 +202,7 @@ loader_map.load( 'map.glb', function ( map ) {
 				
 				//-------------------------------------------
 				
-				//playmusic();//Play MUSIC !!!!!!!!!!!!!!!!!!!!!!!!!
+				playmusic();//Play MUSIC !!!!!!!!!!!!!!!!!!!!!!!!!
 
 				//-------------------------------------------
 
@@ -401,37 +403,52 @@ loader_map.load( 'map.glb', function ( map ) {
 				scene.add( floor );//Added floor
 //------------------------------------------------------
 				// objects
+				
+				const boxGeometry = new THREE.BoxGeometry( 10, 5, 10 ).toNonIndexed();
 
-				//const boxGeometry = new THREE.BoxGeometry( 20, 20, 20 ).toNonIndexed();
+				position = boxGeometry.attributes.position;
 
-				//position = boxGeometry.attributes.position;
-				//const colorsBox = [];
+				
 
-				/*for ( let i = 0, l = position.count; i < l; i ++ ) {
+				
 
-					color.setHSL( Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-					colorsBox.push( color.r, color.g, color.b );
+				for ( let i = 0; i < 32; i ++ ) {
 
-				}*/ 		//random boxes color
-
-				//boxGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( colorsBox, 3 ) );
-
-				/*for ( let i = 0; i < 500; i ++ ) {
-
-					const boxMaterial = new THREE.MeshPhongMaterial( { specular: 0xffffff, flatShading: true, vertexColors: true } );
-					boxMaterial.color.setHSL( Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75 );
-
-					const box = new THREE.Mesh( boxGeometry, boxMaterial );
-					box.position.x = Math.floor( Math.random() * 20 - 10 ) * 20;
+					const box = new THREE.Mesh( boxGeometry);
+					/*box.position.x = Math.floor( Math.random() * 20 - 10 ) * 20;
 					box.position.y = Math.floor( Math.random() * 20 ) * 20 + 10;
-					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;
+					box.position.z = Math.floor( Math.random() * 20 - 10 ) * 20;*/
+
+					box.position.x=0;
+				box.position.y=(0+i)-17;
+				box.position.z=-40-i;
+				//box.rotation.y=0;
 
 					scene.add( box );
 					objects.push( box );
 
-				}*/ //Random Boxes Added
+				} //Random Boxes Added
+				const box = new THREE.Mesh( boxGeometry);
+				box.position.x=0;
+				box.position.y=15;
+				box.position.z=-100;
+				box.scale.set(5,1,5);
+				scene.add( box );
+					objects.push( box );
 
-				//
+
+				/*-----------------------TRYING FOR COLLISION
+				const boxGeometry = new THREE.BoxGeometry( 10, 5, 10 ).toNonIndexed();
+				const box = new THREE.Mesh( boxGeometry);
+
+				box.position.x=0;
+				box.position.y=0;
+				box.position.z=-40;
+				scene.add( box );
+				objects.push( box );
+
+
+				*/
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -523,36 +540,11 @@ renderer.render( scene, camera );
 }
 function loadsceneobjects()
 {
-/*	loader_bakkapore.load( 'Bakka_Pore.glb', function ( bakkapore ) {
-							bakkapore.scene.position.set(0,0,-100);
-							bakkapore.scene.scale.set( 30.0, 30.0, 30.0 );
-							scene.add( bakkapore.scene );
-							//render();
 
-						} );
-
-						
-						loader_kallbotti.load( 'Kallbotti.glb', function ( kallbotti ) {
-							kallbotti.scene.position.set(0,0,-15);
-							kallbotti.scene.scale.set( 10.0, 10.0, 10.0 );
-							scene.add( kallbotti.scene );
-							//render();
-						} );
-
-						
-						loader_coorgsat.load( 'CoorgSat.glb', function ( coorgsat ) {
-							coorgsat.scene.position.set(0,10,-10);
-							coorgsat.scene.scale.set( 4.0, 4.0, 4.0);
-							coorgsat.scene.rotateY(20.5)
-							scene.add( coorgsat.scene );
-							
-							//render();
-						} );
-						*/
 }
 function deformer()
 {
-	//scene.remove( coorgsatobj.scene );
+	
 	coorgsatobj.scene.rotation.y=1.6+rotater;
 	coorgsatobj.scene.scale.set(4+scaler,4+scaler,4+scaler);
 	
